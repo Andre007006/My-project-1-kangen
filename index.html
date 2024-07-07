@@ -5,7 +5,128 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kangen</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://cdn.wallpapersafari.com/5/30/EhSuPs.jpg') no-repeat center center/cover;
+            filter: blur(1px);
+            z-index: -1;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 600px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 5px solid #fff;
+            color: #fff;
+            margin-bottom: 20px;
+            word-wrap: break-word;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px 0;
+            background: #000;
+            border: 2px solid #fff;
+            color: #fff;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .button:hover {
+            background: #333;
+        }
+
+        .input-field {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 2px solid #fff;
+            background: #000;
+            color: #fff;
+        }
+
+        .typing {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+                font-size: 14px;
+            }
+
+            .input-field {
+                width: 80%;
+            }
+
+            .button {
+                width: 80%;
+                padding: 10px;
+            }
+
+            .audio-controls {
+                width: 100%;
+            }
+        }
+
+        .audio-controls {
+            width: 90%;
+            max-width: 600px;
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .audio-button {
+            padding: 10px 20px;
+            background-color: #000;
+            color: #fff;
+            border: 2px solid #fff;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .audio-button:hover {
+            background-color: #333;
+        }
+
+        .create {
+            color: #fff;
+            text-align: center;
+        }
+
+        .create a {
+            color: cyan;
+            text-decoration: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -72,14 +193,90 @@
     </div>
 
     <audio id="myAudio">
-        <source src="c:\Users\Asus\Music\Daftar Lagu\Tentang Rindu cover by Tami Aulia.mp3" type="audio/mp3">
+        <source
+            src="https://github.com/Andre007006/My-project-1-kangen/blame/7759b371c92a352054a249c56eca5ce8db048a4b/Tentang%20Rindu%20cover%20by%20Tami%20Aulia.mp3"
+            type="audio/mp3">
         Your browser does not support the audio element.
     </audio>
     <div class="create">
         <p>create by <a href="https://www.instagram.com/andresaputra4026?utm_source=qr&igsh=MXd1NXY3cnVyZzZwYQ==">Andre
                 <br>❤️</a></p>
     </div>
-    <script src="script.js"></script>
+    <script>
+        function startInteraction() {
+            document.getElementById('startScreen').classList.add('hidden');
+            document.getElementById('step1').classList.remove('hidden');
+        }
+
+        function goToStep(stepNumber) {
+            const currentStep = document.querySelector('.step:not(.hidden)');
+            const nextStep = document.getElementById('step' + stepNumber);
+            currentStep.classList.add('hidden');
+            nextStep.classList.remove('hidden');
+            if (stepNumber === 2) {
+                const name = document.getElementById('nameInput').value;
+                document.getElementById('userName').textContent = name;
+                document.getElementById('userName2').textContent = name;
+                document.getElementById('userName3').textContent = name;
+                document.getElementById('userName4').textContent = name;
+            }
+            if (stepNumber >= 2 && stepNumber <= 6) {
+                startTypingAnimation(document.querySelector('#step' + stepNumber + ' .typing'));
+            }
+        }
+
+        function checkStatus(isGood) {
+            if (isGood) {
+                goToStep(4);
+            } else {
+                goToStep(3);
+            }
+        }
+
+        function meetUp(isYes) {
+            if (isYes) {
+                goToStep(7);
+            } else {
+                alert('Tidak apa-apa, kita bisa bertemu nanti.');
+            }
+        }
+
+        function sendLocation() {
+            const location = document.getElementById('locationInput').value;
+            const userName = document.getElementById('nameInput').value;
+            const whatsappLink = `https://wa.me/6283861995160?text=Hai ${userName}, aku pilih lokasi ini: ${location}`;
+            window.open(whatsappLink, '_blank');
+        }
+
+        function startTypingAnimation(element) {
+            const text = element.textContent;
+            element.textContent = '';
+            let i = 0;
+            const typingSpeed = 50;
+            const interval = setInterval(() => {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                } else {
+                    clearInterval(interval);
+                }
+            }, typingSpeed);
+        }
+
+        const audio = document.getElementById('myAudio');
+        const playButton = document.getElementById('playButton');
+
+        function toggleAudio() {
+            if (audio.paused) {
+                audio.play();
+                playButton.textContent = 'Berhenti';
+            } else {
+                audio.pause();
+                audio.currentTime = 0;
+                playButton.textContent = 'Putar Audio';
+            }
+        }
+    </script>
 </body>
 
 </html>
