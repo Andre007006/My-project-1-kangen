@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kangen</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="background"></div>
+    <div class="container">
+        <div id="startScreen">
+            <h3>Selamat datang !</h3>
+            <p>Putar audionya dulu biar seru dan Klik tombol dibawah ini untuk melanjutkan</p>
+            <button class="button" onclick="startInteraction()">Mulai</button>
+        </div>
+        <div id="step1" class="step hidden">
+            <h3>Masukkan nama kamu:</h3>
+            <input type="text" id="nameInput" class="input-field" placeholder="Nama kamu...">
+            <button class="button" onclick="goToStep(2)">Lanjutkan</button>
+        </div>
+        <div id="step2" class="step hidden">
+            <p><span class="typing" id="typing2">Haii <span id="userName"></span>, bagaimana kabarmu?</span></p>
+            <div class="buttons">
+                <button class="button" onclick="checkStatus(true)">Baik</button>
+                <button class="button" onclick="checkStatus(false)">Sedikit kurang baik</button>
+            </div>
+        </div>
+        <div id="step3" class="step hidden">
+            <p><span class="typing" id="typing3">Semoga cepat sembuh yaa <span id="userName2"></span>! agar kita bisa
+                    bertemu hehe</span></p>
+            <div class="buttons">
+                <button class="button" onclick="goToStep(4)">Lanjutkan</button>
+            </div>
+        </div>
+        <div id="step4" class="step hidden">
+            <p><span class="typing" id="typing4">Saya pengen ngomong nih sama kamu</span></p>
+            <div class="buttons">
+                <button class="button" onclick="goToStep(5)">Lanjutkan</button>
+            </div>
+        </div>
+        <div id="step5" class="step hidden">
+            <p><span class="typing" id="typing5">Aku sebenarnya kangen dan rindu sama <span
+                        id="userName3"></span></span></p>
+            <div class="buttons">
+                <button class="button" onclick="goToStep(6)">Lanjutkan</button>
+            </div>
+        </div>
+        <div id="step6" class="step hidden">
+            <p><span class="typing" id="typing6">Aku pengen ketemu sama <span id="userName4"></span>, boleh yaa?</span>
+            </p>
+            <div class="buttons">
+                <button class="button" onclick="meetUp(true)">Boleh</button>
+                <button class="button" onclick="meetUp(false)">Nanti saja...</button>
+            </div>
+        </div>
+        <div id="step7" class="step hidden">
+            <p><span class="typing" id="typing7">Kasih tau ya waktunya dan Tentukan lokasi yang romantis dan jangan lupa
+                    kasih tau aku yaa:</span>
+            </p>
+            <input type="text" id="locationInput" class="input-field" placeholder="Lokasi yang romantis...">
+            <div class="buttons">
+                <button class="button" onclick="sendLocation()">Kirim</button>
+            </div>
+        </div>
+    </div>
+    <!-- Tombol play audio -->
+    <div class="audio-controls">
+        <button id="playButton" class="audio-button" onclick="toggleAudio()">Putar Audio</button>
+    </div>
+
+    <audio id="myAudio">
+        <source src="c:\Users\Asus\Music\Daftar Lagu\Tentang Rindu cover by Tami Aulia.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+    <div class="create">
+        <p>create by <a href="https://www.instagram.com/andresaputra4026?utm_source=qr&igsh=MXd1NXY3cnVyZzZwYQ==">Andre
+                <br>❤️</a></p>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
